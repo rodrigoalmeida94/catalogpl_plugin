@@ -23,10 +23,12 @@ repository:https://github.com/catalogpl_plugin/
 
 icon:planet.svg
 
-experimental:True
+experimental:False
 deprecated:False
 
-changelog: 2.0(2019-03-19)
+changelog: 2.1(2019-07-05)
+  Add support for different asset types (3 and 4 band, collects)
+  - 2.0
   Migrated to QGIS 3.4
   - 1.7.1
   Fixed error ltgRoot in downloadImages(catalogpl.py).
@@ -37,7 +39,7 @@ changelog: 2.0(2019-03-19)
   Add groups of images with same date, add menu Open Form in images, clear cache of TMS, and add action 'Add selection' to pl_scenes.
   - 1.5
   Reverse images order in group catalog, add directories,
-  tms, tif, thumbnail, inside download directory 
+  tms, tif, thumbnail, inside download directory
   - 1.4
   Fix cache_path when save TMS
   - 1.3
@@ -45,7 +47,7 @@ changelog: 2.0(2019-03-19)
   - 1.2
   Fixed when the first use of plugin(not set the directory), not show the setting
   - 1.1
-  Changed checkbox to radiobutton for images, only one type of image for searching. 
+  Changed checkbox to radiobutton for images, only one type of image for searching.
   - 1.0
   Updated to API Planet V1
   - 0.8
@@ -65,4 +67,3 @@ changelog: 2.0(2019-03-19)
   Add metadata in table and refactoring codes.
   - 0.1
   Start of plugin
-  
