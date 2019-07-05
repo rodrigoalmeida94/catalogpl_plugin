@@ -308,7 +308,7 @@ class DockWidgetPlanetLabs(QDockWidget):
         self.nameAssets = {
             'Planet': 'PSScene4Band',
             'Rapideye': 'REOrthoTile',
-            'Skysat': 'SkySatScene',
+            'Skysat': 'SkySatCollect',
         }
         self.titleSelectDirectory = "Select download directory"
         self.btnSearchImage, self.btnMosaic, self.msgBar = None, None, None
