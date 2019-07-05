@@ -40,8 +40,8 @@ class API_PlanetLabs(QObject):
     statusNoCredential = '*None*'
     urlRoot = "https://api.planet.com"
     urlQuickSearch = "https://api.planet.com/data/v1/quick-search"
-    urlYXZImage = "https://tiles.planet.com/data/v1/{item_type}/{item_id}/%7Bz%7D/%7Bx%7D/%7By%7D.png"
-    urlYXZMosaicMonthly = "https://tiles.planet.com/basemaps/v1/planet-tiles/global_monthly_{year}_{month:02d}_mosaic/gmap/%7Bz%7D/%7Bx%7D/%7By%7D.png"
+    urlYXZImage = "https://tiles3.planet.com/data/v1/{item_type}/{item_id}/%7Bz%7D/%7Bx%7D/%7By%7D.png"
+    urlYXZMosaicMonthly = "https://tiles3.planet.com/basemaps/v1/planet-tiles/global_monthly_{year}_{month:02d}_mosaic/gmap/%7Bz%7D/%7Bx%7D/%7By%7D.png"
     urlMetadata = "https://api.planet.com/data/v1/item-types/{item_type}/items/{item_id}"
     addFeature = pyqtSignal(str)
     def __init__(self):
