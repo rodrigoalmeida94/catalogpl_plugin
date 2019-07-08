@@ -2,7 +2,7 @@
 # # -*- coding: utf-8 -*-
 """
 /***************************************************************************
-Name                 : Planet Labs 
+Name                 : Planet Labs
 Description          : Class for work with Planet Labs
 Date                 : March, 2019 migrate to Qt5
 copyright            : (C) 2019 by Luiz Motta
@@ -161,8 +161,8 @@ class DockWidgetPlanetLabs(QDockWidget):
                 wgtPage.setObjectName('objPageKey')
                 lytPage = QHBoxLayout()
 
-                # SEE object names in: self.pageKey 
-                
+                # SEE object names in: self.pageKey
+
                 # Layout Password
                 lyt = QHBoxLayout()
                 w = QLabel("Key:")
@@ -230,7 +230,6 @@ class DockWidgetPlanetLabs(QDockWidget):
             # Page Images
             assets = 'objPlanet' if paramsSetting['assets'] is None else f"obj{paramsSetting['assets']}"
             w = self.findChild( QRadioButton, assets )
-            w.setChecked( True )
             if not paramsSetting['path'] is None:
                 name = paramsSetting['path']
                 w = self.findChild( QPushButton, 'objPath')
@@ -306,9 +305,11 @@ class DockWidgetPlanetLabs(QDockWidget):
         self.pl = PlanetLabs( iface, self )
         self.titleLog, self.currentProcess, self.countFeatures = 'Planet', None, None
         self.nameAssets = {
-            'Planet': 'PSScene4Band',
-            'Rapideye': 'REOrthoTile',
-            'Skysat': 'SkySatCollect',
+            'PlanetScope 4-band': 'PSScene4Band',
+            'PlanetScope 3-band': 'PSScene3Band',
+            'RapidEye': 'REOrthoTile',
+            'SkySat Scene': 'SkySatScene',
+            'SkySat Collect': 'SkySatCollect'
         }
         self.titleSelectDirectory = "Select download directory"
         self.btnSearchImage, self.btnMosaic, self.msgBar = None, None, None
@@ -356,7 +357,7 @@ class DockWidgetPlanetLabs(QDockWidget):
             'date1': self.findChild( QDateEdit, 'objFromMosaic').date(),
             'date2': self.findChild( QDateEdit, 'objToMosaic').date()
         }
-        # 
+        #
         key = {
             'optionKey': getOptionRadioButton( self.nameOptionsKey ),
             'password': self.findChild( QLineEdit, 'objPasswordEdit').text(),
@@ -572,7 +573,7 @@ class DockWidgetPlanetLabs(QDockWidget):
     def showProgressBar(self, hasFile):
         self.wgtProgressBar.setHasFile( hasFile )
         self.wgtProgressBar.show()
-       
+
     @pyqtSlot()
     def hideProgressBar(self):
         self.wgtProgressBar.hide()
@@ -619,7 +620,7 @@ class PlanetLabs(QObject):
         self.coordTransform = getCoordinateTransform()
         self.styleFile = 'pl_scenes.qml'
         self.downloadDir = '/home/lmotta/data/pl_download'
-        self.formatCatalogName = "{}({} .. {})"        
+        self.formatCatalogName = "{}({} .. {})"
         self.catalog = None
         self.catalog_id = None
         self.calculateMetadata = None
@@ -656,7 +657,7 @@ class PlanetLabs(QObject):
         ]
         if isConnect:
             for item in ss:
-                item['signal'].connect( item['slot'] )  
+                item['signal'].connect( item['slot'] )
         else:
             for item in ss:
                 item['signal'].disconnect( item['slot'] )
@@ -701,7 +702,7 @@ class PlanetLabs(QObject):
             layer.setCustomProperty('field_id', { 'name': 'item_id', 'value': item_id } ) # Field'type = String
             layer.setCustomProperty('wkt_geom', geom.asWkt() )
             self.menuXYZTiles.setLayer( layer )
-        
+
         def getXYZTiles(item_type, item_id):
             url = self.apiPL.urlYXZImage.format( item_type=item_type, item_id=item_id )
             return f"type=xyz&url={url}&username={self.apiPL.validKey}&zmax=19&zmin=0"
@@ -793,7 +794,7 @@ class PlanetLabs(QObject):
                     perc = int( bytesReceived / bytesTotal * 100)
                     if perc % self.limitPercentImage == 0:
                         self.receivedBytesImage.emit( bytesReceived, bytesTotal, perc )
-                
+
                 fileName = f"{item_type}_{item_id}.part"
                 self.currentImage.emit( fileName )
                 fileName = os.path.join( downloadDir, fileName )
@@ -1020,7 +1021,7 @@ class PlanetLabs(QObject):
             rectCanvas = self.canvas.extent() if crsCanvas == self.crsCatalog else ct.transform( self.canvas.extent() )
             geom = QgsGeometry.fromRect( rectCanvas )
             return json.loads( geom.asJson() )
-        
+
         def getDateRangeFilter(dateGte, dateLte):
             dtGte = QDateTime( dateGte )
             dtLte = QDateTime( dateLte )
@@ -1134,7 +1135,7 @@ class PlanetLabs(QObject):
                 self.message.emit( Qgis.Warning, 'No scene in map view', [] )
             else:
                 self.message.emit( Qgis.Success, 'Finished OK', [] )
-            
+
         self.changeButtonApply.emit('Search')
 
     @pyqtSlot(QDate, QDate)

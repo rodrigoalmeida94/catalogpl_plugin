@@ -2,7 +2,7 @@
 # # -*- coding: utf-8 -*-
 """
 /***************************************************************************
-Name                 : Qt API for Catalog Planet Labs 
+Name                 : Qt API for Catalog Planet Labs
 Description          : API for Planet Labs
 Date                 : May, 2015, March, 2019 migrate to Qt5
 copyright            : (C) 2015 by Luiz Motta
@@ -20,12 +20,12 @@ email                : motta.luiz@gmail.com
  ***************************************************************************/
 """
 
-import json, datetime 
+import json, datetime
 
 from qgis.PyQt.QtCore import (
     QObject,
     pyqtSignal, pyqtSlot,
-    QUrl    
+    QUrl
 )
 from qgis.PyQt.QtNetwork import QNetworkReply
 
@@ -249,4 +249,3 @@ class API_PlanetLabs(QObject):
     def kill(self):
         self.access.isKill = True
         self.access.abortReply.emit()
-    
